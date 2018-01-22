@@ -1,0 +1,15 @@
+FROM vulhub/php:5.5-apache
+
+LABEL maintainer=<mengbulang@live.com>
+
+RUN set -x \
+    && apt-get update \
+    && apt-get instll curl unzip mysql mysqli docker-php-ext-install -y \
+    && apt-get clean \
+    # clean /var/www/html/
+    && rm -rf /var/www/html/* \
+    # dedecms 5.7:http://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7-UTF8-SP1-Full.tar.gz
+    && curl -o 'dedecms.tar.gz' http://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7-UTF8-SP1-Full.tar.gz \
+    && tar -xf dedecms.tar.gz DedeCMS-V5.7-UTF8-SP1-Full/uploads/ --strip-components 2 -C /var/www/html/
+
+EXPOSE 80
