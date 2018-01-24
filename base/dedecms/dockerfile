@@ -9,8 +9,12 @@ RUN set -x \
     && apt-get clean \
     # clean /var/www/html/
     && rm -rf /var/www/html/* \
+    && cd /tmp/ \
     # dedecms 5.7:http://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7-UTF8-SP1-Full.tar.gz
     && curl -o 'dedecms.tar.gz' http://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7-UTF8-SP1-Full.tar.gz \
-    && tar -xf dedecms.tar.gz DedeCMS-V5.7-UTF8-SP1-Full/uploads/ --strip-components 2 -C /var/www/html/
+    && tar -xf dedecms.tar.gz DedeCMS-V5.7-UTF8-SP1-Full/uploads/ --strip-components 2 -C /var/www/html/ \
+    && chown www-data:www-data -R /var/www/html/ \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 EXPOSE 80
