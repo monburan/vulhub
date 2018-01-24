@@ -4,7 +4,8 @@ LABEL maintainer=<mengbulang@live.com>
 
 RUN set -x \
     && apt-get update \
-    && apt-get install curl unzip mysql mysqli docker-php-ext-install -y \
+    && apt-get install curl tar -y --no-install-recommends \
+    && docker-php-ext-install mysql mysqli \
     && apt-get clean \
     # clean /var/www/html/
     && rm -rf /var/www/html/* \
